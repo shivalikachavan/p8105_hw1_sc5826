@@ -4,27 +4,25 @@ author: "Shivalika Chavan"
 date: "2025-09-11"
 output: github_document
 ---
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+**Problem 1**
+```{r, echo = TRUE, message = FALSE}
+library(tidyverse)
+library(moderndive)
+data("early_january_weather")
 ```
 
-## R Markdown
+The `early_january_weather` dataset has `r ncol(early_january_weather)` variables (`r paste(colnames(early_january_weather), sep = ",")`). It contains weather data originating from `r unique(early_january_weather$origin)`, between days `r min(early_january_weather$day)` and `r max(early_january_weather$day)` of the `r unique(early_january_weather$month)`st month of `r unique(early_january_weather$year)` (January 1-15, 2013). Data  was recorded between `r min(early_january_weather$time_hour)` and `r max(early_january_weather$time_hour)`. There are `r nrow(early_january_weather)` total observations during this period. 
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+With temperature ranging between `r min(early_january_weather$temp)` and `r max(early_january_weather$temp)`, we can assume these were in Fahrenheight. The mean temperature observed in this period was `r round(mean(early_january_weather$temp), 2)`F. 
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
+```{r echo = FALSE}
+ggplot(early_january_weather, aes(x = time_hour, y = temp, color = humid)) +
+  geom_point() +
+  ylab("Temperature (F)") 
+ggsave("temp_humidity_scatter_plot.pdf", height = 4, width = 6)
 ```
+There is a cyclical pattern observed in temperature, where the weather appears to peak mid-day and then falls during the night. The peaks appear to trend upward (temperature is getting warmer), until January 14th, where it steeply drops further down. Right before the steep drop in temperature, there also is a sharp increase in the humidity to `r max(early_january_weather$humid)`. This is higher than the average humidity during this period of observation (`r round(mean(early_january_weather$humid), 0)`). 
 
-## Including Plots
 
-You can also embed plots, for example:
 
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
