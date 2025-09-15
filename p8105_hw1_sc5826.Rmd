@@ -11,9 +11,9 @@ library(moderndive)
 data("early_january_weather")
 ```
 
-The `early_january_weather` dataset has `r ncol(early_january_weather)` variables (`r paste(colnames(early_january_weather), sep = ",")`). It contains weather data originating from `r unique(early_january_weather$origin)`, between days `r min(early_january_weather$day)` and `r max(early_january_weather$day)` of the `r unique(early_january_weather$month)`st month of `r unique(early_january_weather$year)` (January 1-15, 2013). Data  was recorded between `r min(early_january_weather$time_hour)` and `r max(early_january_weather$time_hour)`. There are `r nrow(early_january_weather)` total observations during this period. 
+The `early_january_weather` data set has `r ncol(early_january_weather)` variables (`r paste(colnames(early_january_weather), sep = ",")`). It contains weather data originating from `r unique(early_january_weather$origin)`, between days `r min(early_january_weather$day)` and `r max(early_january_weather$day)` of the `r unique(early_january_weather$month)`st month of `r unique(early_january_weather$year)` (January 1-15, 2013). Data  was recorded between `r min(early_january_weather$time_hour)` and `r max(early_january_weather$time_hour)`. There are `r nrow(early_january_weather)` total observations during this period. 
 
-With temperature ranging between `r min(early_january_weather$temp)` and `r max(early_january_weather$temp)`, we can assume these were in Fahrenheight. The mean temperature observed in this period was `r round(mean(early_january_weather$temp), 2)`F. 
+With temperature ranging between `r min(early_january_weather$temp)` and `r max(early_january_weather$temp)`, we can assume these were in Fahrenheit. The mean temperature observed in this period was `r round(mean(early_january_weather$temp), 2)`F. 
 
 ```{r echo = FALSE}
 ggplot(early_january_weather, aes(x = time_hour, y = temp, color = humid)) +
